@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Citri</string>
+    <string name="login">Электронная почта / телефон</string>
+    <string name="password">Пароль от аккаунта</string>
+    <string name="enter">Войти</string>
+    <string name="ok">OK</string>
+    <string name="successfully_logged_in">Успешно вошли в аккаунт %1$s</string>
+    <string name="coins_count">Количество монет</string>
+    <string name="start_sending">Начать</string>
+    <string name="target_link">Ссылка на целевой профиль</string>
+    <string name="countAtSend">Размер разовой отправки</string>
+    <string name="incorrect_values">Общее количество отправляемых монет не может быть меньше объёма отправки за один запрос</string>
+    <string name="unable_to_get_user_id">Не удалось получить ID пользователя, проверьте ссылку</string>
+    <string name="unable_to_prepare_vips">Не удалось настроить фан-клуб (%1$s)</string>
+    <string name="coins_available">Доступно монет: %1$d</string>
+</resources>
