@@ -13,4 +13,5 @@
     <string name="unable_to_get_user_id">Не удалось получить ID пользователя, проверьте ссылку</string>
     <string name="unable_to_prepare_vips">Не удалось настроить фан-клуб (%1$s)</string>
     <string name="coins_available">Доступно монет: %1$d</string>
+    <string name="ads">Другие приложения: t.me/DWReaction</string>
 </resources>

